@@ -1,6 +1,6 @@
 #! /usr/bin/env groovy
 
-def all(String currentVersion, String updatedVersion, String gitRepo) {
+def call(String currentVersion, String updatedVersion, String gitRepo) {
   echo "Commit changes to github ... "
 
   withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
