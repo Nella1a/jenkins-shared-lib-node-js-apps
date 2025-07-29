@@ -1,6 +1,6 @@
 #! /usr/bin/env groovy
 
-call def () {
+def call () {
   echo "Update version ... "
   def version = sh(
                 script: "node -p \"require('./package.json').version\"",
