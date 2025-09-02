@@ -1,12 +1,11 @@
 #! /usr/bin/env groovy
 
-def call(String imgName, String port, String hostIp, String userName) {
+def call(String IMAGE_TAG, String ec2Instance, String scriptName) {
   echo "Deploying to AWS EC2 Instance ..."
 
-  def dockerCmd = "docker run -d -p ${port}:${port} ${imgName}"
-
   sshagent(['ec2-server-key']) {
-    sh "ssh -o StrictHostKeyChecking=no ${userName}@${hostIp} '${dockerCmd}'"
+    sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} chmod +x /home/ec2-user/${scriptName}"
+    sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} bash ./${scriptName} ${IMAGE_TAG}"
   }
 
 }
